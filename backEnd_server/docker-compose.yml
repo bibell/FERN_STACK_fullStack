@@ -1,0 +1,21 @@
+version: '3.9'
+
+service:
+   mongoDB:
+      image: mongo:latest
+      restart: alwayes
+      volumes:
+         - mongoDB:/data/db
+
+   api:
+      build: .
+      ports:
+        - 7000:5000
+      environment:
+         port: '7000'
+         url: "mongodb+srv://addisEmployee:addisBelay@cluster0.ku3lt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"         
+      depends_on:
+         - mongoDB     
+
+volumes:
+   mongoDB: []         
